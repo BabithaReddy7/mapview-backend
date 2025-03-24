@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const db = require("../database");
 const authController = require("../controllers/authController"); // Correct import
 
 // Define routes
