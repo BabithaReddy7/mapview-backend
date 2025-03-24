@@ -26,8 +26,6 @@ exports.loginUser = async (req, res) => {
         return res.status(400).json({ error: "User not found" });
       }
 
-      console.log("Received password:", password);
-      console.log("Stored user:", user);
       console.log("Stored password hash:", user.password);
 
       // Validate password
@@ -48,6 +46,7 @@ exports.loginUser = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
 
 // User Registration
 exports.registerUser = async (req, res) => {
@@ -81,6 +80,8 @@ exports.registerUser = async (req, res) => {
             console.error("Database error:", err);
             return res.status(500).json({ error: "User registration failed" });
           }
+
+          console.log("User registered:", { username, email, hashedPassword });
 
           res.status(201).json({ message: "User registered successfully" });
         }
