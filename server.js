@@ -1,6 +1,8 @@
-const sqlite3 = require('sqlite3').verbose();
+const express = require("express");
+const cors = require("cors");
+const sqlite3 = require("sqlite3").verbose();
 
-// Create a new database connection
+// Initialize the database
 const db = new sqlite3.Database('./database.sqlite', (err) => {
     if (err) {
         console.error("Error connecting to database:", err.message);
@@ -9,28 +11,31 @@ const db = new sqlite3.Database('./database.sqlite', (err) => {
     }
 });
 
-module.exports = db; // Export the database connection if needed elsewhere
-
-const express = require("express");
-const cors = require("cors");
-
+// Import Routes
 const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
-const mapRoutes = require("./routes/mapRoutes"); 
-
+const mapRoutes = require("./routes/mapRoutes");
 
 const app = express();
-app.use(express.json());
-app.use(cors());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/dashboard", dashboardRoutes) // Make sure this is here
-app.use("/api", mapRoutes); // Register the route
+// Middleware
+app.use(express.json());  // For parsing application/json
+app.use(cors());          // To allow cross-origin requests
 
-const PORT = 5000;
+// Routes
+app.use("/api/auth", authRoutes);         // Authentication routes
+app.use("/api/dashboard", dashboardRoutes); // Dashboard routes
+app.use("/api", mapRoutes);               // Map-related routes
+
+// Test route to check if the server is working
 app.get("/test", (req, res) => {
     res.json({ message: "Server is running!" });
 });
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Start the server
+const PORT = process.env.PORT || 5000;  // Use environment variable for PORT if available
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
 
+module.exports = db;  // Export db if needed in other files

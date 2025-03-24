@@ -58,24 +58,37 @@ exports.registerUser = async (req, res) => {
       return res.status(400).json({ error: "All fields are required." });
     }
 
-    // Hash Password
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Insert into Database
-    db.run(
-      "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
-      [username, email, hashedPassword],
-      function (err) {
-        if (err) {
-          console.error("Database error:", err);
-          return res.status(500).json({ error: "User registration failed." });
-        }
-
-        res.status(201).json({ message: "User registered successfully" });
+    // Check if the user already exists by email
+    db.get("SELECT * FROM users WHERE email = ?", [email], async (err, user) => {
+      if (err) {
+        console.error("Database error:", err);
+        return res.status(500).json({ error: "Internal server error" });
       }
-    );
+
+      if (user) {
+        return res.status(400).json({ error: "User already exists" });
+      }
+
+      // Hash Password
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Insert new user
+      db.run(
+        "INSERT INTO users (username, email, password) VALUES (?, ?, ?)",
+        [username, email, hashedPassword],
+        function (err) {
+          if (err) {
+            console.error("Database error:", err);
+            return res.status(500).json({ error: "User registration failed" });
+          }
+
+          res.status(201).json({ message: "User registered successfully" });
+        }
+      );
+    });
   } catch (error) {
     console.error("Registration error:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
