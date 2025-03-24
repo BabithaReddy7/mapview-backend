@@ -16,6 +16,10 @@ const authRoutes = require("./routes/authRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
 const mapRoutes = require("./routes/mapRoutes");
 
+
+
+
+
 const app = express();
 
 // Middleware
@@ -24,6 +28,7 @@ app.use(cors());          // To allow cross-origin requests
 
 // Routes
 app.use("/api/auth", authRoutes);         // Authentication routes
+
 app.use("/api/dashboard", dashboardRoutes); // Dashboard routes
 app.use("/api", mapRoutes);               // Map-related routes
 
