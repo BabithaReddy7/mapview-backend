@@ -1,0 +1,25 @@
+# Node.js modules
+node_modules/
+
+# Log files
+npm-debug.log
+yarn-error.log
+*.log
+
+# Environment variable files
+.env
+
+# SQLite Database files
+*.db
+*.sqlite
+
+# Build output directories
+/build
+/dist
+
+# OS and IDE files
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/
