@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 // Dummy map data (Replace with real data fetching logic)
-router.get("/map", (req, res) => {
+router.get("/", (req, res) => {  // Ensure this matches "/api/map" correctly
     res.json({
         message: "Map data retrieved successfully",
         data: {
