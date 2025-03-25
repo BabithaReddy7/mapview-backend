@@ -1,0 +1,30 @@
+
+###
+POST http://localhost:5000/api/auth/register
+Content-Type: application/json
+
+{
+  "username": "John Doe",
+  "email": "john@example.com",
+  "password": "123456"
+}
+
+###
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john@example.com",
+  "password": "123456"
+}
+
+###
+GET http://localhost:5000/api/auth/users
+
+###
+GET http://localhost:5000/api/dashboard
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQyODYzOTI4LCJleHAiOjE3NDI4Njc1Mjh9.5h_GCCBGbYNd7Pv4B7-oGrn9KHgEReHxaixkD8vAojE
+
+###
+GET http://localhost:5000/api/map
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJqb2huQGV4YW1wbGUuY29tIiwiaWF0IjoxNzQyODYzOTI4LCJleHAiOjE3NDI4Njc1Mjh9.5h_GCCBGbYNd7Pv4B7-oGrn9KHgEReHxaixkD8vAojE
