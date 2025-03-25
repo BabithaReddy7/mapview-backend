@@ -30,7 +30,7 @@ app.use(cors());          // To allow cross-origin requests
 app.use("/api/auth", authRoutes);         // Authentication routes
 
 app.use("/api/dashboard", dashboardRoutes); // Dashboard routes
-app.use("/api", mapRoutes);               // Map-related routes
+app.use("/api/map", mapRoutes);               // Map-related routes
 
 // Test route to check if the server is working
 app.get("/test", (req, res) => {

@@ -8,6 +8,9 @@ const JWT_SECRET = process.env.JWT_SECRET || "your_secret_key_here";
 
 // User Login
 exports.loginUser = async (req, res) => {
+  console.log("🔹 Login function triggered"); 
+  
+  console.log("Received login request:", req.body);
   try {
     const { email, password } = req.body;
 

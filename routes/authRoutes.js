@@ -6,6 +6,7 @@ const authController = require("../controllers/authController"); // Correct impo
 // Define routes
 router.post("/register", authController.registerUser);
 router.post("/login", authController.loginUser);
+
 router.get("/users", (req, res) => {
     db.all("SELECT id, username, email FROM users", [], (err, rows) => {
       if (err) {
